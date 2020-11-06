@@ -24,3 +24,4 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 functions/scouting-football-newsletter-firebase-adminsdk-a8cbd-8921bf101f.json
+functions/.runtimeconfig.json

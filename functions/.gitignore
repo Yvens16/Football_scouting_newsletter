@@ -1,2 +1,4 @@
 node_modules/
 scouting-football-newsletter-firebase-adminsdk-a8cbd-8921bf101f.json
+functions/.runtimeconfig.json
+.runtimeconfig.json
