@@ -1,5 +1,6 @@
-/* eslint-disable import/no-anonymous-default-export */
-import React, { createContext } from 'react';
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
+import React, { createContext } from "react";
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
@@ -9,7 +10,7 @@ import "firebase/functions";
 const FirebaseContext = createContext(null);
 export { FirebaseContext };
 
-export default (({ children }) => {
+export default ({ children }) => {
   if (!firebase.apps.length) {
     firebase.initializeApp({
       apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -23,11 +24,11 @@ export default (({ children }) => {
     });
   }
   if (process.env.NODE_ENV === "development") {
-    firebase.functions().useFunctionsEmulator("http://localhost:5001");
+    firebase.functions().useEmulator("http://localhost:5001");
   }
   return (
     <FirebaseContext.Provider value={firebase}>
       {children}
     </FirebaseContext.Provider>
-  )
-})
+  );
+};
