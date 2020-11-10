@@ -1,11 +1,7 @@
 const sendinblueAPI = require('sib-api-v3-sdk');
 const functions = require('firebase-functions');
-// const SEND_IN_BLUE_API_KEY = functions.config().sendinblue.apikey;
-console.log(
-  '@@@@@@@@@@@@@functions.config().sendinblue:',
-  functions.config().sendinblue,
-);
-const SEND_IN_BLUE_API_KEY = functions.config().sendinblue;
+
+const SEND_IN_BLUE_API_KEY = functions.config().sendinblue.apiKey;
 
 const sdiClient = sendinblueAPI.ApiClient.instance;
 const apiKey = sdiClient.authentications['api-key'];

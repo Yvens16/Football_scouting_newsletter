@@ -7,5 +7,5 @@ const isEjecting = false;
 
 module.exports = {
   ...createJestConfig(resolveReactScriptsModule, rootDir, isEjecting),
-  displayName: 'cra',
+  displayName: { name: 'React', color: 'blue' },
 };
