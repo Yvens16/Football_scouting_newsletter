@@ -23,8 +23,16 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint && npm run build"
+      "pre-commit": "lint-staged && npm run build"
     }
+  },
+  "lint-staged": {
+    "**/*.+(js|css|html|md)": [
+      "eslint . --ignore-path .eslintignore"
+    ],
+    "**/*.+(js|json|css|html|md)": [
+      "cross-env NODE_ENV=test jest --bail --findRelatedTests"
+    ]
   },
   "eslintConfig": {
     "extends": [
