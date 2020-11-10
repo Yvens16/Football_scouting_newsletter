@@ -1,11 +1,10 @@
 const sendinblueAPI = require('sib-api-v3-sdk');
-const { createContact } = require('../sendinblue');
+// const {createContact} = require('../sendinblue');
 
-// const contactName = "Yvens";
-// const contactMobile = "6027098765";
-// const contactEmail = "yvens@gmail.com";
-jest.mock('../sendinblue');
-jest.genMockFromModule('sib-api-v3-sdk');
+// const contactName = 'Yvens'; // FNAME + LNAME
+// const contactMobile = '6027098765';
+// const contactEmail = 'yvens@gmail.com';
+// jest.genMockFromModule('sib-api-v3-sdk');
 jest.mock('sib-api-v3-sdk', () => ({
   ApiClient: {
     instance: {
@@ -40,12 +39,27 @@ jest.mock('sib-api-v3-sdk', () => ({
       },
     ]),
   })),
+  CreateContact: jest.fn(),
+  ContactsApi: jest.fn().mockImplementation(() => ({
+    createContact: jest.fn().mockResolvedValue([
+      {
+        id: 'FAKE_ID',
+      },
+    ]),
+  })),
 }));
 
 beforeEach(() => {
   sendinblueAPI.AccountApi.mockClear();
+  sendinblueAPI.ContactsApi.mockClear();
 });
 
-test.only('Example', () => {
-  expect(createContact).not.toHaveBeenCalled();
-});
+test.todo('Should I test the createContact function ?');
+
+// test.only('Example', async() => {
+//   createContact({contactName, contactEmail, contactMobile});
+//   const apiInstance = new sendinblueAPI.ContactsApi();
+//   const CreateContactAPI = new sendinblueAPI.CreateContact();
+//   console.log('apiInstance:', apiInstance)
+//   expect(apiInstance.createContact).toHaveBeenCalledWith(CreateContactAPI);
+// });
