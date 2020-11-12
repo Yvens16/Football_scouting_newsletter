@@ -35,7 +35,7 @@ const createContact = ({ contactName, contactEmail, contactMobile }) => {
   if (!contactMobile.includes('+33')) {
     correctContactMobile = `+33${contactMobile}`;
   }
-  CreateContactAPI.attributes = { FNAME: contactName, LNAME: '', SMS: correctContactMobile };
+  CreateContactAPI.attributes = { NOM: contactName, PRENOM: '', SMS: correctContactMobile };
   CreateContactAPI.listIds = [5];
   apiInstance.createContact(CreateContactAPI)
     .then((data) => {

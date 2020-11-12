@@ -27,3 +27,6 @@ functions/scouting-football-newsletter-firebase-adminsdk-a8cbd-8921bf101f.json
 package.json
 package-lock.json
 firebase.json
+public/index.html
+src/index.css
+

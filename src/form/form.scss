@@ -1,0 +1,96 @@
+@import 'styles/colors';
+@import 'styles/fonts';
+$border-radius-10: 10px;
+.register_form {
+  color: $primary-sub-color;
+  // background-color: $secondary-sub-color;
+  border-radius: $border-radius-10;
+  padding: 10px;
+  font-family: $font-family-text;
+  margin: 0 10px;
+  text-align: center;
+  max-width: 20em;
+  height: 25em;
+  @media(min-width: 338px) {
+    height: 22em;
+  }
+  font-size: $font-size;
+  &_title {
+    font-size: $font-size;
+  }
+  &_sub {
+    font-size: $font-size;
+  }
+  &_inputs {
+    min-height: 12em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 0.8em;
+    input, button {
+      font-size: 1em;
+      background-color: $input-bg-color;
+      border: none;
+      outline: none;
+      padding: 0.6em;
+      border-radius: $border-radius-10;
+    }
+    input:focus {
+      border: 1px solid $btn-bg-color;
+    }
+    input[type=radio] {
+      margin-right: 10px;
+    }
+    button {
+      background-color: $btn-bg-color;
+      color: $secondary-sub-color;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+      &:hover {
+        transform: scale(1.1);
+      }
+      &:active {
+        transform: scale(1);
+      }
+    }
+    label {
+      text-align: start;
+      display: flex;
+      justify-content: flex-start;
+      align-items: baseline;
+    }
+  }
+  &_validated {
+    font-family: $font-family-title;
+    height: 100%;
+    line-height: 2em;
+    color: $validated-text-color;
+    height: -webkit-fill-available;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+  @keyframes appearFromBottom {
+    0% {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      display: block;
+      opacity: 1;
+    }
+  }
+  &_mailsvg {
+    animation: 1s ease-in appearFromBottom;
+    width: 100px;
+  }
+}
+
+.white {
+  background-color: $secondary-sub-color;
+}
+.black {
+  background-color: $form-black-bg-color;
+  color: $secondary-sub-color;
+}

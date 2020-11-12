@@ -55,6 +55,7 @@ beforeEach(() => {
 });
 
 test.todo('Should I test the createContact function ?');
+// https://jestjs.io/docs/en/es6-class-mocks
 
 // test.only('Example', async() => {
 //   createContact({contactName, contactEmail, contactMobile});

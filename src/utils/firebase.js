@@ -24,7 +24,7 @@ export default ({ children }) => {
     });
   }
   if (process.env.NODE_ENV === 'development') {
-    firebase.functions().useEmulator('http://localhost:5001');
+    firebase.functions().useEmulator('localhost', 5001);
   }
   return (
     <FirebaseContext.Provider value={firebase}>

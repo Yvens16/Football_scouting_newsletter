@@ -1,14 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './assets/fonts/Dosis-Regular.ttf';
+import './assets/fonts/Dosis-SemiBold.ttf';
 import './index.css';
 import FirebaseProvider from './utils/firebase';
-import App from './App';
+// import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Form from './form/Form';
 
 ReactDOM.render(
   <React.StrictMode>
     <FirebaseProvider>
-      <App />
+      {/* <App /> */}
+      <Form />
     </FirebaseProvider>
   </React.StrictMode>,
   document.getElementById('root'),

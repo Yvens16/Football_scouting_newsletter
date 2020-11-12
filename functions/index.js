@@ -1,5 +1,7 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
+const cors = require('cors')({ origin: true });
+
 const { createContact } = require('./sendinblue/sendinblue');
 require('./sendinblue/sendinblue');
 
@@ -16,12 +18,11 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
   response.send('Hello from Firebase, Yvens!');
 });
 
-exports.createAndAddContactToList = functions.https.onRequest(async (request, response) => {
-  functions.logger.info('createAndAddContactToList', { structuredData: true });
-  const { body: { contactName, contactMobile, contactEmail } } = request;
-  console.log('@@@contactEmail:', contactEmail);
-  console.log('@@@@contactMobile:', contactMobile);
-  console.log('@@@@@contactName:', contactName);
-  const data = createContact({ contactName, contactMobile, contactEmail });
-  response.send(data);
-});
+exports.createAndAddContactToList = functions.https.onRequest(
+  async (request, response) => cors(request, response, () => {
+    functions.logger.info('createAndAddContactToList', { structuredData: true });
+    const { body: { data: { contactName, contactMobile, contactEmail } } } = request;
+    const data = createContact({ contactName, contactMobile, contactEmail });
+    response.send({ data });
+  }),
+);
