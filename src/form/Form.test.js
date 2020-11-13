@@ -1,10 +1,10 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Form from './Form';
-import { FirebaseContext } from '../utils/firebase';
+import { FirebaseContext } from '../utils/external_apis/firebase';
 
-jest.mock('../utils/airtable');
+jest.mock('../utils/external_apis/airtable');
 jest.mock('airtable');
 let nameInput;
 let telInput;
@@ -56,7 +56,7 @@ describe('renders form inputs', () => {
   });
   it('Should fill in the form', () => {
     const name = 'Steve';
-    const tel = '0678654567';
+    const tel = '06 78 65 45 67';
     const mail = 'steveRoger@gmail.com';
     userEvent.type(nameInput, name);
     userEvent.type(telInput, tel);
@@ -74,5 +74,27 @@ describe('renders form inputs', () => {
     userEvent.click(freeAdviceRadioBtn);
     expect(freeAdviceRadioBtn.checked).toBeTruthy();
     expect(detectionRegion.checked).toBeFalsy();
+  });
+  it('Should show error message for email', async () => {
+    userEvent.type(mailInput, 'steve.com');
+    mailInput.blur();
+    expect(screen.getByTestId('mailErrorMsg')).toBeInTheDocument();
+
+    userEvent.type(mailInput, 'steve@gmail.com');
+    mailInput.blur();
+    await waitFor(() => {
+      expect(screen.queryByTestId('mailErrorMsg')).not.toBeInTheDocument();
+    });
+  });
+  it('Should show error message for phone number', async () => {
+    userEvent.type(telInput, 'steve.com');
+    telInput.blur();
+    expect(screen.getByTestId('phoneErrorMsg')).toBeInTheDocument();
+
+    userEvent.type(telInput, '0627265454');
+    telInput.blur();
+    await waitFor(() => {
+      expect(screen.queryByTestId('phoneErrorMsg')).not.toBeInTheDocument();
+    });
   });
 });

@@ -58,6 +58,12 @@ $border-radius-10: 10px;
       justify-content: flex-start;
       align-items: baseline;
     }
+    .error {
+      border: 2px solid crimson;
+    }
+    .error::placeholder {
+      color: crimson;
+    }
   }
   &_validated {
     font-family: $font-family-title;
@@ -84,6 +90,10 @@ $border-radius-10: 10px;
   &_mailsvg {
     animation: 1s ease-in appearFromBottom;
     width: 100px;
+  }
+  &_error {
+    background: crimson;
+    color: #fff;
   }
 }
 

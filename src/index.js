@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './assets/fonts/Dosis-Regular.ttf';
 import './assets/fonts/Dosis-SemiBold.ttf';
 import './index.css';
-import FirebaseProvider from './utils/firebase';
+import FirebaseProvider from './utils/external_apis/firebase';
 // import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Form from './form/Form';

@@ -3,8 +3,9 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { useState, useEffect, useContext } from 'react';
 import MailSVG from '../assets/email_sent.svg';
-import { FirebaseContext } from '../utils/firebase';
-import { createAirtableContact } from '../utils/airtable';
+import { FirebaseContext } from '../utils/external_apis/firebase';
+import { createAirtableContact } from '../utils/external_apis/airtable';
+import { validateFormEmail, validatePhoneNumber } from '../utils/form_validation/validation';
 
 require('./form.scss');
 
@@ -12,13 +13,34 @@ export default function Form() {
   const firebase = useContext(FirebaseContext);
   const [background, setBackground] = useState('white');
   const [pageIndex, setpageIndex] = useState(0);
+  const [formError, setFormError] = useState({
+    tel: false,
+    email: false,
+  });
   const [formState, setFormState] = useState({
     name: '',
     tel: '',
     email: '',
     selectedOption: '',
   });
-
+  const checkEmailError = (e) => {
+    const { value } = e.target;
+    const email = validateFormEmail(formState.email);
+    setFormError({ email: !email });
+    setFormState({
+      ...formState,
+      email: email ? value : '',
+    });
+  };
+  const checkphoneError = (e) => {
+    const { value } = e.target;
+    const tel = validatePhoneNumber(formState.tel);
+    setFormError({ tel: !tel });
+    setFormState({
+      ...formState,
+      tel: tel ? value : '',
+    });
+  };
   const handleChange = (e) => {
     const { name, type, checked } = e.target;
     const value = type === 'checkbox' ? checked : e.target.value;
@@ -41,6 +63,11 @@ export default function Form() {
     const {
       name, tel, email, selectedOption,
     } = formState;
+    if (formError.email || formError.tel) {
+      setTimeout(() => {
+        setFormError({ tel: false, email: false });
+      }, 4000);
+    }
     if (pageIndex % 2 !== 0) {
       setBackground('black');
     } else if (pageIndex === 2) {
@@ -51,7 +78,7 @@ export default function Form() {
     } else {
       setBackground('white');
     }
-  }, [formState, pageIndex]);
+  }, [formState, pageIndex, formError]);
 
   const FirstPage = () => (
     <>
@@ -72,16 +99,22 @@ export default function Form() {
           type="tel"
           name="tel"
           id="tel"
-          placeholder="Numéro de téléphone"
+          data-testid={formError.tel ? 'phoneErrorMsg' : 'noError'}
+          placeholder={formError.tel ? 'Le numéro est mal rentré' : 'Numéro de téléphone'}
+          className={formError.tel ? 'error' : ''}
           onChange={handleChange}
+          onBlur={checkphoneError}
           value={formState.tel}
         />
         <input
           type="email"
           name="email"
           id="email"
-          placeholder="Email"
+          onBlur={checkEmailError}
+          data-testid={formError.email ? 'mailErrorMsg' : 'noError'}
+          placeholder={formError.email ? 'Il y a un problème avec votre mail' : 'Email'}
           onChange={handleChange}
+          className={formError.email ? 'error' : ''}
           value={formState.email}
         />
         <button type="submit" value="Submit">Inscris-toi</button>
@@ -136,7 +169,7 @@ export default function Form() {
   return (
     <>
       <div className={`register_form ${background || ''}`}>
-        {renderPage() }
+        {renderPage()}
       </div>
     </>
   );
