@@ -1,4 +1,4 @@
-@import-normalize;
+/* @import-normalize; */
 @font-face {
   font-family: 'Dosis Regular';
   src: local('Dosis Regular'), url(./assets/fonts/Dosis-Regular.ttf) format('truetype');
@@ -9,5 +9,5 @@
 }
 body {
   background-color: rgba(45, 46, 47, 0.7);
-  font-family: 'Dosis Semibold';
+  /* background-color: black; */
 }

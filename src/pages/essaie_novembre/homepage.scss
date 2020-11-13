@@ -1,0 +1,86 @@
+@import 'styles/colors';
+@import 'styles/fonts';
+@mixin center-mobile {
+  @media (min-width: 400px) {
+    max-width: 380px;
+    margin: 0 auto;
+  }
+}
+@mixin center-ipad {
+  @media (min-width: 600px) {
+    max-width: 470px;
+    margin: 0 auto;
+  }
+}
+@mixin small-latop {
+  @media (min-width: 800px) {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+}
+.home {
+  text-align: center;
+  margin: 0 -5px;
+  font-size: 1em;
+  background: black;
+  font-family: $font-family-text;
+  &__content {
+    background-image: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.5)), url('../../assets//soccer_foot_on_ball.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: top;
+    @media (min-width: 1200px) {
+      background-size: cover;
+    }
+
+    &__hero {
+
+      max-width: 325px;
+      margin: 0 auto;
+      @include center-mobile;
+      @include center-ipad;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #FFFFFF;
+      @media (min-width: 1200px) {
+        flex-direction: row;
+        justify-content: space-between;
+        max-width: 50%;
+        margin: 0 auto;
+      }
+      &-title {
+        @media (min-width: 1200px) {
+          flex: 50;
+          margin-right: 20px;
+        }
+      }
+      h1 {
+        font-family: $font-family-title;
+        text-align: center;
+      }
+      h2 {
+        text-align: center;
+      }
+      &_form {
+        padding: 4em 0;
+      }
+    }
+    &__benefits {
+      font-size: 1.2em;
+      color: $benefits-text-color;
+      background-color: #FFFFFF;
+      padding: 5px 10px;
+      text-align: left;
+      @media(min-width: 900px) {
+        text-align: center;
+      }
+    }
+    footer {
+      padding: 2em 0;
+      color: #FFFFFF;
+    }
+  }
+}

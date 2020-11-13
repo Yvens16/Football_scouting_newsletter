@@ -3,7 +3,6 @@
 $border-radius-10: 10px;
 .register_form {
   color: $primary-sub-color;
-  // background-color: $secondary-sub-color;
   border-radius: $border-radius-10;
   padding: 10px;
   font-family: $font-family-text;
@@ -12,7 +11,7 @@ $border-radius-10: 10px;
   max-width: 20em;
   height: 25em;
   @media(min-width: 338px) {
-    height: 22em;
+    height: 23em;
   }
   font-size: $font-size;
   &_title {
@@ -59,10 +58,10 @@ $border-radius-10: 10px;
       align-items: baseline;
     }
     .error {
-      border: 2px solid crimson;
+      border: 2px solid $error-color;
     }
     .error::placeholder {
-      color: crimson;
+      color: $error-color;
     }
   }
   &_validated {
@@ -90,10 +89,6 @@ $border-radius-10: 10px;
   &_mailsvg {
     animation: 1s ease-in appearFromBottom;
     width: 100px;
-  }
-  &_error {
-    background: crimson;
-    color: #fff;
   }
 }
 

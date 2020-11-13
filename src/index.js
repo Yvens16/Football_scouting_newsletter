@@ -4,15 +4,15 @@ import './assets/fonts/Dosis-Regular.ttf';
 import './assets/fonts/Dosis-SemiBold.ttf';
 import './index.css';
 import FirebaseProvider from './utils/external_apis/firebase';
-// import App from './App';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Form from './form/Form';
+// import Form from './form/Form';
+// import Home from './pages/essaie_novembre/homepage';
 
 ReactDOM.render(
   <React.StrictMode>
     <FirebaseProvider>
-      {/* <App /> */}
-      <Form />
+      <App />
     </FirebaseProvider>
   </React.StrictMode>,
   document.getElementById('root'),
