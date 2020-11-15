@@ -25,6 +25,15 @@
   background: black;
   font-family: $font-family-text;
   &__content {
+    &_logo_container {
+      margin: auto;
+      width: 10em;
+      height: 10em;
+      svg {
+        height: 10em;
+        width: 10em;
+      }
+    }
     background-image: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.5)), url('../../assets//soccer_foot_on_ball.jpg');
     background-size: contain;
     background-repeat: no-repeat;

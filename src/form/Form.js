@@ -83,7 +83,7 @@ export default function Form() {
   const FirstPage = () => (
     <>
       <div className="register_form_title">
-        <h3>Jusqu'ou sera tu prêt à aller pour réaliser ton rêve ?</h3>
+        <h3>Jusqu'où seras-tu prêt à aller pour réaliser ton rêve ?</h3>
       </div>
       <div className="register_form_sub"><h4>Je veux recevoir les détections :</h4></div>
       <form className="register_form_inputs" onSubmit={(e) => goToNextPage(e)}>
