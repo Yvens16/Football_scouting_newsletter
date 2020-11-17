@@ -44,6 +44,24 @@ const createContact = ({ contactName, contactEmail, contactMobile }) => {
     }, (error) => console.error('CreateContactAPI ERROR', error));
 };
 
+const sendTransactionnalEmail = ({ contactEmail, contactName, templateId }) => {
+  const apiInstance = new sendinblueAPI.TransactionalEmailsApi();
+
+  const sendSmtpEmail = new sendinblueAPI.SendSmtpEmail();
+
+  sendSmtpEmail.templateId = templateId;
+  sendSmtpEmail.to = [{ email: contactEmail, PRENOM: contactName }];
+  sendSmtpEmail.params = { PRENOM: contactName };
+  sendSmtpEmail.replyTo = { email: contactEmail, PRENOM: contactName };
+  apiInstance.sendTransacEmail(sendSmtpEmail).then((data) => {
+    console.log(`sendTransactionnalEmail API called successfully. Returned data: ${JSON.stringify(data)}`);
+  }, (error) => {
+    console.error(error);
+    return error;
+  });
+};
+
 module.exports = {
   createContact,
+  sendTransactionnalEmail,
 };
