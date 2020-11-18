@@ -50,7 +50,7 @@ export default function Form() {
     });
   };
 
-  const goToNextPage = (e, sendEmail) => {
+  const goToNextPage = (e, sendEmail, whichPage) => {
     const { name, tel, email } = formState;
     e.preventDefault();
     setpageIndex(pageIndex + 1);
@@ -58,6 +58,29 @@ export default function Form() {
       const createAndAddContactToList = firebase.functions().httpsCallable('createAndAddContactToList');
       createAndAddContactToList({ contactName: name, contactMobile: tel, contactEmail: email })
         .then((data) => console.log(data), (error) => console.log(error));
+    } else if (whichPage && whichPage === 'secondPage') {
+      let value;
+      switch (formState.selectedOption) {
+        case 'freeAdvice':
+          value = 0;
+          break;
+        case 'detectionRegion':
+          value = 7;
+          break;
+        case 'detectionRegionAndFrance':
+          value = 9;
+          break;
+        case 'detectionFranceAndAway':
+          value = 15;
+          break;
+        default:
+          break;
+      }
+      if (typeof window !== 'undefined') {
+        if (window.fbq != null) {
+          window.fbq('track', 'Purchase', { currency: 'EUR', value });
+        }
+      }
     }
   };
 
@@ -114,7 +137,7 @@ export default function Form() {
           id="email"
           onBlur={checkEmailError}
           data-testid={formError.email ? 'mailErrorMsg' : 'noError'}
-          placeholder={formError.email ? 'Il y a un problème avec votre mail' : 'Email'}
+          placeholder={formError.email ? 'Il y a un problème avec ton mail' : 'Email'}
           onChange={handleChange}
           className={formError.email ? 'error' : ''}
           value={formState.email}
@@ -130,7 +153,7 @@ export default function Form() {
         <h3>Jusqu'ou sera tu prêt à aller pour réaliser ton rêve ?</h3>
       </div>
       <div className="register_form_sub"><h4>Je veux :</h4></div>
-      <form className="register_form_inputs" onSubmit={(e) => goToNextPage(e)}>
+      <form className="register_form_inputs" onSubmit={(e) => goToNextPage(e, false, 'secondPage')}>
         <label htmlFor="advice">
           <input type="radio" name="selectedOption" id="advice" onChange={handleChange} checked={formState.selectedOption === 'freeAdvice'} value="freeAdvice" data-testid="radio" />
           Recevoir des conseils pour les détections (Gratuit)
