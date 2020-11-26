@@ -154,10 +154,10 @@ export default function Form() {
       </div>
       <div className="register_form_sub"><h4>Je veux :</h4></div>
       <form className="register_form_inputs" onSubmit={(e) => goToNextPage(e, false, 'secondPage')}>
-        <label htmlFor="advice">
+        {/* <label htmlFor="advice">
           <input type="radio" name="selectedOption" id="advice" onChange={handleChange} checked={formState.selectedOption === 'freeAdvice'} value="freeAdvice" data-testid="radio" />
           Recevoir des conseils pour les détections (Gratuit)
-        </label>
+        </label> */}
         <label htmlFor="region">
           <input type="radio" name="selectedOption" id="region" onChange={handleChange} checked={formState.selectedOption === 'detectionRegion'} value="detectionRegion" data-testid="detectionRegion" />
           Les détections l'île de France 7€/mois
